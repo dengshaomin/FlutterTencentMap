@@ -53,6 +53,9 @@ dependencies {
 // kotlin扩展（可选）
     implementation 'com.geyifeng.immersionbar:immersionbar-ktx:3.2.2'
     implementation 'com.tencent.map:tencent-map-vector-sdk:4.3.4'
+    implementation 'com.tencent.map.geolocation:TencentLocationSdk-openplatform:7.3.9'
+
     implementation 'com.github.tbruyelle:rxpermissions:0.12'
     implementation "io.reactivex.rxjava3:rxjava:3.1.5"
+    implementation 'com.blankj:utilcodex:1.30.1'
 }

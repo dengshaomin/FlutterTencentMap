@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tencent_map/TextView.dart';
+import 'package:flutter_tencent_map/socket/WebsocketFactory.dart';
 import 'package:flutter_tencent_map/test_page_1.dart';
+import 'package:flutter_tencent_map/web_socket_page.dart';
+
+import 'common/RoutePath.dart';
 import 'native_view_factory.dart';
 import 'test_page_0.dart';
-import 'common/Global.dart';
-import 'common/RoutePath.dart';
 
-void main() => runApp(const MyApp());
-
+// void main() => runApp(const MyApp());
+void main()  {
+  WebSocketFactory.instance.initWebSocket();
+  runApp(const MyApp());
+}
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -19,10 +25,11 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       routes: {
-        '/': (context) => const MyHomePage(title: "home page title"),
+        '/': (context) => const WebSocketPage(),
         RoutePath.tencent_map: (context) => const NativeView(1),
         RoutePath.test_page_0: (context) => const TestPage0(),
         RoutePath.test_page_1: (context) => const TestPage1(),
+        RoutePath.websocket_page: (context) => const WebSocketPage(),
       },
     );
   }
@@ -63,6 +70,16 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
+            TextView(
+              text: "balance",
+              marginTop: 50,
+              paddingLeft: 10,
+              paddingRight: 10,
+              paddingTop: 20,
+              paddingBottom: 20,
+              background: Colors.blue,
+              textColor: Colors.red,
+            )
           ],
         ),
       ),
