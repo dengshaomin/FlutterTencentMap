@@ -48,12 +48,13 @@ class NativeViewPlugin : FlutterPlugin, ActivityAware, MethodChannel.MethodCallH
                         }
 
                         override fun error(
-                            errorCode: String?,
+                            errorCode: String,
                             errorMessage: String?,
                             errorDetails: Any?
                         ) {
                             val a = 1
                         }
+
 
                         override fun notImplemented() {
                             val a= 1

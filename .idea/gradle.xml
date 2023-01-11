@@ -14,6 +14,10 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/flutter_tencent_map" />
             <option value="$PROJECT_DIR$/flutter_tencent_map/.android/Flutter" />
+            <option value="$USER_HOME$/Downloads/flutter/.pub-cache/git/flutter_boost-48b84d813b537ca7e837ff2ad2dc51f437f7459e/android" />
+            <option value="$USER_HOME$/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/connectivity_plus-2.3.9/android" />
+            <option value="$USER_HOME$/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_android-2.0.14/android" />
+            <option value="$USER_HOME$/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/webf-0.13.2+1/android" />
           </set>
         </option>
       </GradleProjectSettings>

@@ -9,10 +9,18 @@ import com.code.fluttertencentmap.flutter.NativeViewActivity
 import com.code.fluttertencentmap.flutter.NativeViewFactory
 import com.code.fluttertencentmap.flutter.nativeview.NativeTencentView
 import com.tencent.tencentmap.mapsdk.maps.MapView
+import io.flutter.embedding.android.FlutterActivityLaunchConfigs
+import io.flutter.embedding.engine.FlutterEngine
+import io.flutter.embedding.engine.FlutterEngineCache
+import io.flutter.embedding.engine.dart.DartExecutor
 
 class MineApp : Application() {
     override fun onCreate() {
         super.onCreate()
+        FlutterEngineCache.getInstance().put("cache", FlutterEngine(this).apply {
+            dartExecutor.executeDartEntrypoint(DartExecutor.DartEntrypoint.createDefault())
+//            navigationChannel.setInitialRoute("test_page_1")
+        })
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
             this.registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks {
                 override fun onActivityCreated(p0: Activity, p1: Bundle?) {
@@ -20,26 +28,26 @@ class MineApp : Application() {
                 }
 
                 override fun onActivityStarted(p0: Activity) {
-                    getTencentMapView(p0)?.onStart()
+//                    getTencentMapView(p0)?.onStart()
                 }
 
                 override fun onActivityResumed(p0: Activity) {
-                    getTencentMapView(p0)?.onResume()
+//                    getTencentMapView(p0)?.onResume()
                 }
 
                 override fun onActivityPaused(p0: Activity) {
-                    getTencentMapView(p0)?.onPause()
+//                    getTencentMapView(p0)?.onPause()
                 }
 
                 override fun onActivityStopped(p0: Activity) {
-                    getTencentMapView(p0)?.onStop()
+//                    getTencentMapView(p0)?.onStop()
                 }
 
                 override fun onActivitySaveInstanceState(p0: Activity, p1: Bundle) {
                 }
 
                 override fun onActivityDestroyed(p0: Activity) {
-                    getTencentMapView(p0)?.onDestroy()
+//                    getTencentMapView(p0)?.onDestroy()
                 }
             })
         }

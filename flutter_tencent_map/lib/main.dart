@@ -1,20 +1,89 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tencent_map/NativeCommunity.dart';
 import 'package:flutter_tencent_map/TextView.dart';
-import 'package:flutter_tencent_map/socket/WebsocketFactory.dart';
 import 'package:flutter_tencent_map/test_page_1.dart';
-import 'package:flutter_tencent_map/web_socket_page.dart';
+import 'package:flutter_tencent_map/webf_page.dart';
 
 import 'common/RoutePath.dart';
-import 'native_view_factory.dart';
 import 'test_page_0.dart';
 
-// void main() => runApp(const MyApp());
-void main()  {
-  WebSocketFactory.instance.initWebSocket();
-  runApp(const MyApp());
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  NativeCommunity.getInstance().init();
+  runApp(const MyApp2());
 }
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+// void main() {
+//   CustomFlutterBinding();
+//   runApp(const MyApp());
+// }
+
+// class CustomFlutterBinding extends WidgetsFlutterBinding
+//     with BoostFlutterBinding {}
+
+// class MyApp extends StatefulWidget {
+//   const MyApp({Key? key}) : super(key: key);
+//
+//   @override
+//   _MyAppState createState() => _MyAppState();
+// }
+//
+// class _MyAppState extends State<MyApp> {
+//   Map<String, FlutterBoostRouteFactory> routerMap = {
+//     RoutePath.test_page_0: (settings, uniqueId) {
+//       return CupertinoPageRoute(
+//           settings: settings,
+//           builder: (_) {
+//             Map<String, dynamic> map =
+//                 settings.arguments as Map<String, dynamic>;
+//             print("balance:params:${map}");
+//             return const TestPage0();
+//           });
+//     },
+//     RoutePath.test_page_1: (settings, uniqueId) {
+//       return CupertinoPageRoute(
+//           settings: settings,
+//           builder: (_) {
+//             Map<String, dynamic> map =
+//                 settings.arguments as Map<String, dynamic>;
+//             print("balance:params:${map}");
+//             String data = map['data'] as String;
+//             return const TestPage1();
+//           });
+//     },
+//   };
+//
+//   Route<dynamic>? routeFactory(RouteSettings settings, String? uniqueId) {
+//     FlutterBoostRouteFactory? func = routerMap[settings.name!];
+//     if (func == null) {
+//       return null;
+//     }
+//     return func(settings, uniqueId);
+//   }
+//
+//   Widget appBuilder(Widget home) {
+//     return MaterialApp(
+//       home: home,
+//       debugShowCheckedModeBanner: true,
+//
+//       ///必须加上builder参数，否则showDialog等会出问题
+//       builder: (_, __) {
+//         return home;
+//       },
+//     );
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return FlutterBoostApp(
+//       routeFactory,
+//       appBuilder: appBuilder,
+//     );
+//   }
+// }
+
+class MyApp2 extends StatelessWidget {
+  const MyApp2({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -24,12 +93,29 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      routes: {
-        '/': (context) => const WebSocketPage(),
-        RoutePath.tencent_map: (context) => const NativeView(1),
-        RoutePath.test_page_0: (context) => const TestPage0(),
-        RoutePath.test_page_1: (context) => const TestPage1(),
-        RoutePath.websocket_page: (context) => const WebSocketPage(),
+      // routes: {
+      //   '/': (context) => const WebFPage(),
+      //   RoutePath.tencent_map: (context) => const NativeView(1),
+      //   RoutePath.test_page_0: (context) => const TestPage0(),
+      //   RoutePath.test_page_1: (context) => const TestPage1(),
+      //   RoutePath.websocket_page: (context) => const WebSocketPage(),
+      //   RoutePath.webf_page:(context) => const WebFPage(),
+      // },
+      onGenerateRoute: (setting) {
+        assert(setting.name?.isNotEmpty == true);
+        Uri uri = Uri.parse(setting.name ?? "");
+        String path = uri.path;
+        Object? argument = uri.queryParameters;
+        print("balance:${path}:${argument}:${NativeCommunity.getInstance().params}");
+        switch (path) {
+          case RoutePath.test_page_0:
+            MaterialPageRoute(builder: (context) => const TestPage0());
+            break;
+          case RoutePath.test_page_1:
+            MaterialPageRoute(builder: (context) => const TestPage1());
+            break;
+        }
+        return MaterialPageRoute(builder: (context) => const WebFPage());
       },
     );
   }
